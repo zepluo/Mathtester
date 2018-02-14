@@ -11,4 +11,13 @@ package DataStructure;
  */
 public class Questions {
     
+    
+    private int difficulty;
+    private String stem;
+    private String[] choices;
+    private String correctAnswer;
+    private String userAnswer;
+    
+            
+            
 }
