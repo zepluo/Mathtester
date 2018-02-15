@@ -18,6 +18,8 @@ public class Questions {
     private String correctAnswer;
     private String userAnswer;
     
+    
+    public Questions(int difficulty, String stem, String[] choices)
             
             
 }
