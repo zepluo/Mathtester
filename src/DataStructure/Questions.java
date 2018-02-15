@@ -23,6 +23,10 @@ public class Questions {
     {
        this.difficulty = difficulty;
     }
-            
+    
+    public int getDifficulty()
+    {
+        return difficulty;
+    }
             
 }
