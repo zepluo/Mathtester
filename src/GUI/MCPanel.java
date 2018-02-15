@@ -27,7 +27,10 @@ public class MCPanel extends javax.swing.JPanel {
         this.frame=frame;
     }
 //starts
-
+    public void refreshPanel(){
+        
+    }
+            
 
 //ends        
         
