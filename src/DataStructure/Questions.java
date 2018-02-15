@@ -21,7 +21,7 @@ public class Questions {
     
     public Questions(int difficulty, String stem, String[] choices)
     {
-        
+       this.difficulty = difficulty;
     }
             
             
