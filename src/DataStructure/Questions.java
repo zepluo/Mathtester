@@ -28,5 +28,10 @@ public class Questions {
     {
         return difficulty;
     }
+    
+    public String getStem()
+    {
+        return stem;
+    }
             
 }
