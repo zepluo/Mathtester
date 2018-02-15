@@ -22,7 +22,12 @@ public class Questions {
     public Questions(int difficulty, String stem, String[] choices)
     {
         
+        
     }
             
+    public Questions(int difficulty)
+    {
+        this.difficulty=difficulty;
+    }
             
 }
