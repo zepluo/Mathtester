@@ -21,9 +21,12 @@ import javax.swing.JPanel;
  */
 public class Timer extends Thread{
     
+    public JLabel output;
+    
      public Timer(String str)
          {
 		     super(str);
+                     output=new JLabel("");
 	       }  
 
     
@@ -32,22 +35,10 @@ public class Timer extends Thread{
     public void run ()  
     {      
            Font font1 = new Font("Rockwell Condensed", Font.PLAIN, 100);
-           ImageIcon intro = new ImageIcon("intro.jpg");
-           JFrame f3 = new JFrame();
-           f3.setAlwaysOnTop(true);
-           f3.setSize(500, 200);
-           f3.setLocation(800, 0);
-           JPanel myPanel= new JPanel();
-           f3.add(myPanel);
-           myPanel.setLayout(new FlowLayout());
-           JLabel L = new JLabel("GO");
-           L.setFont(font1);
-           myPanel.add(L);  
-           myPanel.setBackground(Color.BLUE);
-           f3.setVisible(true); 
-           //f3.pack();
-              
-              
+           
+           output.setText("GO");
+           output.setFont(font1);
+          
            for( int i=20;i>=0;i--)
            {
                try {
@@ -56,11 +47,11 @@ public class Timer extends Thread{
                    Logger.getLogger(Timer.class.getName()).log(Level.SEVERE, null, ex);
                }
     
-               L.setText(String.valueOf(i)); 
+               output.setText(String.valueOf(i)); 
            
                if(i==0)
                {  
-                 L.setText("SPEED UP!!");
+                 output.setText("SPEED UP!!");
                }
            }  
            

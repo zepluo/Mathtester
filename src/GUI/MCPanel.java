@@ -6,11 +6,15 @@
 package GUI;
 
 import Main.MainFrame;
+import Main.Timer;
+import java.awt.FlowLayout;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -30,7 +34,16 @@ public class MCPanel extends javax.swing.JPanel {
     public void refreshPanel(){
         
     }
-            
+    
+    public void run()
+    {
+        MCPanel a = new MCPanel(new MainFrame());
+        Timer timer = new Timer("");
+        //JLabel L = Timer.output;
+        //   L.setFont(font1);
+       //    myPanel.add(L);  
+        
+    }
 
 //ends        
         
