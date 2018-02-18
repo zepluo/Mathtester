@@ -5,8 +5,13 @@
  */
 package Main;
 
+import DataStructure.Questions;
+import GUI.FRQPanel;
 import GUI.MCPanel;
+import GUI.endPanel;
+import GUI.startPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,17 +28,56 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
+    
+    public ArrayList<Questions> questionList;
+    public String filePath;
+    public int numQuestion;
+    public int timeInSeconds;
+    public static final int EASY = 0;
+    public static final int MEDIUM = 1;
+    public static final int HARD =2;
+    public static final int UNKNOWN=-1;
+    public static final int MULTIPLECHOICE=0;
+    public static final int FREERESPONSE = 1;
+   
+    
     public MainFrame() {
         initComponents();
-        load();
-    }
-    
-    public void load() {
+       // load();
+       numQuestion=0;
         
+        questionList = new ArrayList<Questions>();
+        //test
+        setDisplayPanel(new Stopwatch(15,this));       
+        setQuestionPanel(new startPanel(this));
+        
+        
+    }
+        public void setDisplayPanel(JPanel panel)
+                
+        {
+            displayPanel.setLayout(new BorderLayout());
+            displayPanel.updateUI();
+            displayPanel.removeAll();
+            
+            displayPanel.add(panel,BorderLayout.CENTER);
+        }
+           
+       public void setQuestionPanel(JPanel panel)
+       {
+          questionPanel.setLayout(new BorderLayout());
+            questionPanel.updateUI();
+            questionPanel.removeAll();
+         
+        questionPanel.add(panel, BorderLayout.CENTER);
+        }
+
+    public void load() {
+        System.out.println(filePath);
                 try {
             // Load file and read info to RAM from file
             BufferedReader loadFile = new BufferedReader(new FileReader(
-                    "Files/Questions/Questions"));
+                    filePath));
 
             String input;
             // Continue to read in from text file 2 lines for each athlete
@@ -45,22 +89,49 @@ public class MainFrame extends javax.swing.JFrame {
 
                 if(type.equalsIgnoreCase("MC"))
                 {
-                    String question = loadFile.readLine();
+                    String stem = loadFile.readLine();
                     
                     input = loadFile.readLine();
                     String[] answerChoices = input.split(",");
-                    System.out.println(question);
-                    for(int i = 0; i < answerChoices.length; i++)
+                    String correctAnswer=loadFile.readLine();
+                    String dif = loadFile.readLine();
+                    int difficulty = UNKNOWN;
+                    if(dif.equalsIgnoreCase("easy"))
                     {
-                        System.out.println(answerChoices[i]);   
+                        difficulty = EASY;
                     }
+                    else if(dif.equalsIgnoreCase("medium"))
+                    {
+                        difficulty=MEDIUM;
+                    }
+                    else if(dif.equalsIgnoreCase("HARD"))
+                    {
+                        difficulty = HARD;
+                    }
+                 
+                    questionList.add(new Questions(MULTIPLECHOICE, difficulty, stem, answerChoices,correctAnswer));
+                    
+                    System.out.println("ADD one");
                 }
-                else
+                else if(type.equalsIgnoreCase("FRQ"))
                 {
-                    String question = loadFile.readLine();
-                    String answer = loadFile.readLine();
-                    System.out.println(question);
-                    System.out.println(answer);
+                    String stem = loadFile.readLine();
+                    String correctAnswer = loadFile.readLine();
+                    String dif = loadFile.readLine();
+                    int difficulty = UNKNOWN;
+                    if(dif.equalsIgnoreCase("easy"))
+                    {
+                        difficulty = EASY;
+                    }
+                    else if(dif.equalsIgnoreCase("medium"))
+                    {
+                        difficulty=MEDIUM;
+                    }
+                    else if(dif.equalsIgnoreCase("HARD"))
+                    {
+                        difficulty = HARD;
+                    }
+                    questionList.add(new Questions(FREERESPONSE,stem,correctAnswer,difficulty) );
                     
                 }
 
@@ -71,31 +142,39 @@ public class MainFrame extends javax.swing.JFrame {
                     "Load Error",
                     JOptionPane.ERROR_MESSAGE);
         }
+         
+                //load question panel
+            bar.setMaximum(questionList.size());
+            bar.setStringPainted(true);
+            
+            loadQuestion();
+            
+        
+        
+        
     }
     
-    public void refresh()
+    public void loadQuestion()
     {
-        questionPanel.setLayout(new BorderLayout());
-        questionPanel.updateUI();
-        questionPanel.removeAll();
-        JPanel mcPanel = new MCPanel(this);
-        questionPanel.add(mcPanel, BorderLayout.CENTER);
-
-    }
-    /**
-    public void setImage()
-    {
-        try{
-        imagePanel.removeAll();
-        imagePanel.setLayout(new BorderLayout());
-                Image myPicture = ImageIO.read(new File('path"));
-                myPicture = ImageChanges.getScaledImage(myPicture, 250); 
-                imageLabel = new JLabel(new ImageIcon( myPicture ));
-                imagePanel.add(imageLabel, BorderLayout.CENTER);
-            } catch (IOException ex) {
-                Logger.getLogger(CheckMCPanel.class.getName()).log(Level.SEVERE, null, ex);
+        if (numQuestion < questionList.size()) {
+            int type = questionList.get(numQuestion).getType();
+            if (type == MULTIPLECHOICE) {
+                setQuestionPanel(new MCPanel(this));
+            } else {
+                setQuestionPanel(new FRQPanel(this));
             }
         }
+        else
+        {
+            setQuestionPanel(new endPanel(this));
+        }
+        bar.setValue(numQuestion);
+        bar.setString(""+numQuestion +"of "+questionList.size());
+    }
+    
+   
+    /**
+   
     
     
     **/
@@ -112,7 +191,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         questionPanel = new javax.swing.JPanel();
+        bar = new javax.swing.JProgressBar();
+        displayPanel = new javax.swing.JPanel();
         MenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         importTestMenuItem = new javax.swing.JMenuItem();
@@ -121,17 +203,48 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenuItem1.setText("jMenuItem1");
 
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout questionPanelLayout = new javax.swing.GroupLayout(questionPanel);
         questionPanel.setLayout(questionPanelLayout);
         questionPanelLayout.setHorizontalGroup(
             questionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 641, Short.MAX_VALUE)
+            .addGap(0, 803, Short.MAX_VALUE)
         );
         questionPanelLayout.setVerticalGroup(
             questionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 342, Short.MAX_VALUE)
+            .addGap(0, 366, Short.MAX_VALUE)
+        );
+
+        bar.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        bar.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        bar.setForeground(new java.awt.Color(255, 0, 0));
+        bar.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                barStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout displayPanelLayout = new javax.swing.GroupLayout(displayPanel);
+        displayPanel.setLayout(displayPanelLayout);
+        displayPanelLayout.setHorizontalGroup(
+            displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 318, Short.MAX_VALUE)
+        );
+        displayPanelLayout.setVerticalGroup(
+            displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 103, Short.MAX_VALUE)
         );
 
         fileMenu.setText("File");
@@ -153,49 +266,45 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(displayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(181, 181, 181)
+                .addComponent(bar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addComponent(questionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(questionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(displayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(questionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void barStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_barStateChanged
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_barStateChanged
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+      java.awt.EventQueue.invokeLater(new Runnable() {
+             
+            @Override
             public void run() {
-                new MainFrame().setVisible(true);
+                MainFrame nF = new MainFrame();
+                nF.setVisible(true);
+                //Runtime.getRuntime().addShutdownHook(new SaveData(nF));
             }
         });
     }
@@ -203,9 +312,12 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu EditMenu;
     private javax.swing.JMenuBar MenuBar;
+    private javax.swing.JProgressBar bar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel displayPanel;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuItem importTestMenuItem;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel questionPanel;
     private javax.swing.JMenuItem saveMyResponseMenuItem;

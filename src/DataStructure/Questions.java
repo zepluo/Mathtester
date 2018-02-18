@@ -18,9 +18,9 @@ public class Questions {
     private String correctAnswer;
     private String userAnswer;
     private int type;
+    public String imageFile;
     public static final int MULTIPLECHOICE=0;
     public static final int FREERESPONSE = 1;
-    
    
     public Questions(int type, int difficulty, String stem, String[] choices, String correctAnswer)
     {
@@ -30,8 +30,20 @@ public class Questions {
        this.correctAnswer = correctAnswer;
        this.type = type;
        userAnswer = null;
+       this.imageFile=imageFile;
     }
-    
+    public Questions(int type, String stem, String correctAnswer,int difficulty)
+    {
+        this.type =type;
+        this.difficulty = difficulty;
+       this.stem = stem;
+        this.correctAnswer = correctAnswer;
+        userAnswer = null;
+        this.choices=null;
+        
+        
+            
+    }
     public int getDifficulty()
     {
         return difficulty;
@@ -46,14 +58,23 @@ public class Questions {
         return stem;
     }
     
+    public String getImageFile()
+    {
+        return imageFile;
+    }
     public String[] getchoices()
     {
         return choices;
     }
             
-    public void setUserANswer( String Answer)
+    public void setUserAnswer( String Answer)
     {
         userAnswer = Answer;
+    }
+    
+    public void setImageFile(String file)
+    {
+        imageFile=file;
     }
     
     public String getUserAnswer()

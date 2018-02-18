@@ -5,15 +5,14 @@
  */
 package GUI;
 
+import DataStructure.Questions;
 import Main.MainFrame;
-import Main.Timer;
-import java.awt.FlowLayout;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import javax.swing.JFrame;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonModel;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+
 
 
 /**
@@ -26,27 +25,30 @@ public class MCPanel extends javax.swing.JPanel {
     /**
      * Creates new form MCPanel
      */
-    public MCPanel(MainFrame frame) {
+    public MCPanel(MainFrame frame)  {
         initComponents();
         this.frame=frame;
+        load();
     }
 //starts
-    public void refreshPanel(){
+    
+    public void load() {
+        
+        Questions cur = frame.questionList.get(frame.numQuestion);
+        A.setText(cur.getchoices()[0]);
+        B.setText(cur.getchoices()[1]);
+        C.setText(cur.getchoices()[2]);
+        D.setText(cur.getchoices()[3]);
+        stemTextField.setText(cur.getStem());
+               
+      
+                
+        
+        
         
     }
     
-    public void run()
-    {
-        MCPanel a = new MCPanel(new MainFrame());
-        Timer timer = new Timer("");
-        //JLabel L = Timer.output;
-        //   L.setFont(font1);
-       //    myPanel.add(L);  
-        
-    }
-
-//ends        
-        
+         
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,32 +59,41 @@ public class MCPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        choiceA = new javax.swing.JRadioButton();
-        choiceB = new javax.swing.JRadioButton();
-        choiceC = new javax.swing.JRadioButton();
-        choiceD = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
+        A = new javax.swing.JRadioButton();
+        B = new javax.swing.JRadioButton();
+        C = new javax.swing.JRadioButton();
+        D = new javax.swing.JRadioButton();
+        imageLabel = new javax.swing.JLabel();
         submitButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        stemTextField = new javax.swing.JTextField();
 
-        choiceA.setText("jRadioButton1");
+        buttonGroup1.add(A);
+        A.setText("jRadioButton1");
 
-        choiceB.setText("jRadioButton2");
-        choiceB.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(B);
+        B.setText("jRadioButton2");
+        B.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                choiceBActionPerformed(evt);
+                BActionPerformed(evt);
             }
         });
 
-        choiceC.setText("jRadioButton3");
+        buttonGroup1.add(C);
+        C.setText("jRadioButton3");
 
-        choiceD.setText("jRadioButton4");
+        buttonGroup1.add(D);
+        D.setText("jRadioButton4");
 
-        jLabel2.setText("jLabel2");
+        imageLabel.setText("jLabel2");
 
         submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setText("jTextField1");
+        stemTextField.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -92,20 +103,20 @@ public class MCPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(choiceC)
+                        .addComponent(C)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                         .addComponent(submitButton)
                         .addGap(69, 69, 69))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(choiceA)
-                            .addComponent(choiceB)
-                            .addComponent(choiceD))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(A)
+                            .addComponent(B)
+                            .addComponent(D))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1)
+                        .addComponent(stemTextField)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -114,36 +125,54 @@ public class MCPanel extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stemTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(choiceA)
+                                .addComponent(A)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(choiceB)
+                                .addComponent(B)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(choiceC))
+                                .addComponent(C))
                             .addComponent(submitButton, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(choiceD)
+                .addComponent(D)
                 .addGap(9, 9, 9))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void choiceBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choiceBActionPerformed
+    private void BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_choiceBActionPerformed
+    }//GEN-LAST:event_BActionPerformed
 
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        // TODO add your handling code here:
+        String choice = null;
+        for (Enumeration<AbstractButton> buttons = buttonGroup1.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button =buttons.nextElement();
 
+            if (button.isSelected()) {
+                choice = button.getName();
+            }
+        }
+        frame.questionList.get(frame.numQuestion).setUserAnswer(choice);
+                
+        frame.numQuestion++;
+        
+        frame.loadQuestion();
+        
+    }//GEN-LAST:event_submitButtonActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton A;
+    private javax.swing.JRadioButton B;
+    private javax.swing.JRadioButton C;
+    private javax.swing.JRadioButton D;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JRadioButton choiceA;
-    private javax.swing.JRadioButton choiceB;
-    private javax.swing.JRadioButton choiceC;
-    private javax.swing.JRadioButton choiceD;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel imageLabel;
+    private javax.swing.JTextField stemTextField;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }
