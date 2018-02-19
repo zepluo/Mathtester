@@ -2,21 +2,21 @@ MC
 How
 1,2,3,4
 A
-Easy      
+medium
 MC
 Why
 2,3,4,5
 A
-Easy
+Hard
 MC
 WHAT
 4,5,6,6
 A
-HARD
+hard
 FRQ
 abc
 ccs
-HARD
+easy
         
         
         

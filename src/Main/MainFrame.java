@@ -48,7 +48,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         questionList = new ArrayList<Questions>();
         //test
-        setDisplayPanel(new Stopwatch(15,this));       
+        setDisplayPanel(new Stopwatch(500,this));       
         setQuestionPanel(new startPanel(this));
         
         
@@ -71,7 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
          
         questionPanel.add(panel, BorderLayout.CENTER);
         }
-
+        
     public void load() {
         System.out.println(filePath);
                 try {
@@ -147,13 +147,31 @@ public class MainFrame extends javax.swing.JFrame {
             bar.setMaximum(questionList.size());
             bar.setStringPainted(true);
             
+            sortQuestions();
             loadQuestion();
             
         
         
         
+  }
+    public void sortQuestions()
+    {
+        for(int end = questionList.size()-1;end>0;end--) {
+            int max = 0;
+            // Find index value of Max
+            for (int x = 1; x <= end; x++) {
+                if (questionList.get(x).getDifficulty()>questionList.get(max).getDifficulty()) {
+                    max = x;
+                }
+            }
+            // Swap Max with End
+            Questions temp = questionList.get(max);
+            questionList.set(max, questionList.get(end));
+            questionList.set(end, temp);
+       
+            
+        }
     }
-    
     public void loadQuestion()
     {
         if (numQuestion < questionList.size()) {
@@ -171,6 +189,7 @@ public class MainFrame extends javax.swing.JFrame {
         bar.setValue(numQuestion);
         bar.setString(""+numQuestion +"of "+questionList.size());
     }
+    
     
    
     /**
@@ -220,7 +239,7 @@ public class MainFrame extends javax.swing.JFrame {
         questionPanel.setLayout(questionPanelLayout);
         questionPanelLayout.setHorizontalGroup(
             questionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 803, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         questionPanelLayout.setVerticalGroup(
             questionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +289,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(displayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(181, 181, 181)
-                .addComponent(bar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bar, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(questionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );

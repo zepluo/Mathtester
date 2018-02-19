@@ -44,6 +44,10 @@ public class Questions {
         
             
     }
+    public String getCorrectAnswer()
+    {
+        return correctAnswer;
+    }
     public int getDifficulty()
     {
         return difficulty;
