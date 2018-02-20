@@ -35,7 +35,7 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="display">
       <Properties>
-        <Property name="text" type="java.lang.String" value="AaaAAAAAAAA"/>
+        <Property name="text" type="java.lang.String" value="START"/>
       </Properties>
       <Events>
         <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="displayPropertyChange"/>

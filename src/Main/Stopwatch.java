@@ -38,15 +38,23 @@ public void go() {
     int delay = 1000;
     int period = 1000;
     timer = new Timer();
-    
+    String stop;
     
     timer.scheduleAtFixedRate(new TimerTask() {
 
         @Override
         public void run() {
             //display.setText(""+setInterval());
-            String x = getElapsedTimeHoursMinutesFromMilliseconds(setInterval()*1000);
             
+            
+            if(frame.finishBeforeTime)
+            {
+                display.setText("");
+            }
+            else   
+            {
+                String x = getElapsedTimeHoursMinutesFromMilliseconds(setInterval()*1000);
+                
             display.setText(x);
             if(interval<10)
             {
@@ -59,6 +67,9 @@ public void go() {
             {
                 frame.setQuestionPanel(new endPanel(frame));
             }
+            }
+            
+            
 
         }
 
@@ -74,7 +85,7 @@ public void go() {
 
         display = new javax.swing.JTextField();
 
-        display.setText("AaaAAAAAAAA");
+        display.setText("START");
         display.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 displayPropertyChange(evt);

@@ -6,6 +6,7 @@
 package GUI;
 
 import Main.MainFrame;
+import Main.Stopwatch;
 import javax.swing.JDialog;
 
 /**
@@ -65,7 +66,7 @@ public class startPanel extends javax.swing.JPanel {
         dialog.add(new openPanel(main));
         dialog.pack();
         dialog.setVisible(true);
-
+        main.setDisplayPanel(new Stopwatch(23,main));
     }//GEN-LAST:event_loadTestActionPerformed
 
 

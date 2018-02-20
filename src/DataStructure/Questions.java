@@ -29,7 +29,7 @@ public class Questions {
        this.choices = choices;
        this.correctAnswer = correctAnswer;
        this.type = type;
-       userAnswer = null;
+       userAnswer = "";
        this.imageFile=imageFile;
     }
     public Questions(int type, String stem, String correctAnswer,int difficulty)
@@ -38,7 +38,7 @@ public class Questions {
         this.difficulty = difficulty;
        this.stem = stem;
         this.correctAnswer = correctAnswer;
-        userAnswer = null;
+        userAnswer = "";
         this.choices=null;
         
         

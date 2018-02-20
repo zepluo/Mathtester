@@ -28,7 +28,9 @@ public class endPanel extends javax.swing.JPanel {
         initComponents();
         this.frame =frame;
         drawScoreTable();
-        scoreFinal.setText("TOTAL RIGHT:"+totalRight+ " out of"+ frame.questionList.size());    }
+        scoreFinal.setText("TOTAL RIGHT:"+totalRight+ " out of"+ frame.questionList.size()); 
+        frame.finishBeforeTime=true;
+    }
         
     public void drawScoreTable()
     {
