@@ -42,8 +42,34 @@ public class MCPanel extends javax.swing.JPanel {
         stemTextField.setText(cur.getStem());
         difficulty.setText(cur.getDifficulty()+"");
         name.setText(""+(frame.numQuestion+1));
-               
-      
+        submitButton.setEnabled(false);  
+        String answer =cur.getUserAnswer();
+        if(!(answer.equals("")))
+        {
+            if(answer.equalsIgnoreCase("A"))
+            {
+                A.setSelected(true);
+                
+            }
+            else if(answer.equalsIgnoreCase("B"))
+            {
+                B.setSelected(true);
+                
+            }
+            else if(answer.equalsIgnoreCase("C"))
+            {
+                C.setSelected(true);
+                
+            }
+            else
+            {
+                D.setSelected(true);
+                
+            }
+            submitButton.setEnabled(true); 
+            
+        }
+            
                 
         
         
@@ -73,6 +99,11 @@ public class MCPanel extends javax.swing.JPanel {
 
         buttonGroup1.add(A);
         A.setText("jRadioButton1");
+        A.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(B);
         B.setText("jRadioButton2");
@@ -84,9 +115,19 @@ public class MCPanel extends javax.swing.JPanel {
 
         buttonGroup1.add(C);
         C.setText("jRadioButton3");
+        C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(D);
         D.setText("jRadioButton4");
+        D.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DActionPerformed(evt);
+            }
+        });
 
         imageLabel.setText("jLabel2");
 
@@ -117,15 +158,10 @@ public class MCPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(submitButton)
                                 .addGap(69, 69, 69))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(A)
-                                    .addComponent(B)
-                                    .addComponent(D))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(stemTextField)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(A)
+                            .addComponent(B)
+                            .addComponent(D)
+                            .addComponent(stemTextField))
                         .addGap(45, 45, 45)
                         .addComponent(difficulty, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
@@ -169,23 +205,41 @@ public class MCPanel extends javax.swing.JPanel {
 
     private void BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BActionPerformed
         // TODO add your handling code here:
+        submitButton.setEnabled(true);
     }//GEN-LAST:event_BActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
+        
         A.setActionCommand("A");
         B.setActionCommand("B");
         C.setActionCommand("C");
         D.setActionCommand("D");
         String choice=buttonGroup1.getSelection().getActionCommand();
+        
         System.out.print(choice);
         frame.questionList.get(frame.numQuestion).setUserAnswer(choice);
                 
         frame.numQuestion++;
-        
+        frame.numQuestionDone++;
         frame.loadQuestion();
         
     }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActionPerformed
+        // TODO add your handling code here:
+        submitButton.setEnabled(true);
+    }//GEN-LAST:event_AActionPerformed
+
+    private void CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CActionPerformed
+        // TODO add your handling code here:
+        submitButton.setEnabled(true);
+    }//GEN-LAST:event_CActionPerformed
+
+    private void DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DActionPerformed
+        // TODO add your handling code here:
+        submitButton.setEnabled(true);
+    }//GEN-LAST:event_DActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

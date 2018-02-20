@@ -37,7 +37,7 @@ public class endPanel extends javax.swing.JPanel {
         String[] rosterHeader = {
             "Question#", "Correct", "Your Answer", "Difficulty"
         };
-
+        
         // Get data for table
         String[][] tableData = new String[frame.questionList.size()][rosterHeader.length];
         // Populate table with data

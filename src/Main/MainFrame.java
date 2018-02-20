@@ -33,7 +33,9 @@ public class MainFrame extends javax.swing.JFrame {
     public ArrayList<Questions> questionList;
     public String filePath;
     public int numQuestion;
+    public int numQuestionDone;
     public int timeInSeconds;
+    
     public boolean finishBeforeTime=false;
     public static final int EASY = 0;
     public static final int MEDIUM = 1;
@@ -50,7 +52,8 @@ public class MainFrame extends javax.swing.JFrame {
         
         questionList = new ArrayList<Questions>();
         //test
-               
+        previousButton.setEnabled(false);
+        nextButton.setEnabled(false);
         setQuestionPanel(new startPanel(this));
         
         
@@ -74,6 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
         questionPanel.add(panel, BorderLayout.CENTER);
         }
         
+    //read the question from data.txt.
     public void load() {
         System.out.println(filePath);
                 try {
@@ -157,6 +161,7 @@ public class MainFrame extends javax.swing.JFrame {
         
   }
     
+    //sort difficulty.
     public void sortQuestions()
     {
         for(int end = questionList.size()-1;end>0;end--) {
@@ -177,6 +182,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
     public void loadQuestion()
     {
+        if(numQuestion==-1)
+        {
+            previousButton.setEnabled(false);
+            numQuestion++;
+            return;
+        }
+        previousButton.setEnabled(true);
+        nextButton.setEnabled(true);
         if (numQuestion < questionList.size()) {
             int type = questionList.get(numQuestion).getType();
             if (type == MULTIPLECHOICE) {
@@ -187,13 +200,29 @@ public class MainFrame extends javax.swing.JFrame {
         }
         else
         {
-            setQuestionPanel(new endPanel(this));
+            int n = JOptionPane.showConfirmDialog(this,
+                    "Wuold you like to finish your test", "Finish",
+                    JOptionPane.YES_NO_OPTION);
+            switch (n) {
+                case 0:
+                    setQuestionPanel(new endPanel(this));
+                    previousButton.setEnabled(false);
+                    nextButton.setEnabled(false);
+                case 1:
+                   
+            }
+            
         }
-        bar.setValue(numQuestion);
-        bar.setString(""+numQuestion +"of "+questionList.size());
+        bar.setValue(numQuestionDone);
+        bar.setString(""+numQuestionDone +"of "+questionList.size());
     }
     
     public void nextQuestion()
+    {
+        
+    }
+    
+    public void previousQuestion()
     {
         
     }
@@ -255,7 +284,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         questionPanelLayout.setVerticalGroup(
             questionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 366, Short.MAX_VALUE)
+            .addGap(0, 501, Short.MAX_VALUE)
         );
 
         bar.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
@@ -271,7 +300,7 @@ public class MainFrame extends javax.swing.JFrame {
         displayPanel.setLayout(displayPanelLayout);
         displayPanelLayout.setHorizontalGroup(
             displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 318, Short.MAX_VALUE)
+            .addGap(0, 181, Short.MAX_VALUE)
         );
         displayPanelLayout.setVerticalGroup(
             displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,6 +308,11 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         nextButton.setText("next");
+        nextButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextButtonMouseClicked(evt);
+            }
+        });
         nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextButtonActionPerformed(evt);
@@ -286,6 +320,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         previousButton.setText("previous");
+        previousButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousButtonActionPerformed(evt);
+            }
+        });
 
         fileMenu.setText("File");
 
@@ -306,36 +345,32 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(questionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(displayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(181, 181, 181)
-                        .addComponent(bar, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addGap(18, 18, 18)
                         .addComponent(previousButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(32, 32, 32)
                         .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
+                        .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(questionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(displayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(bar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                        .addComponent(displayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(previousButton)
+                        .addComponent(nextButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(previousButton)
-                    .addComponent(nextButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(questionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(questionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -348,8 +383,21 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
+        numQuestion++;
+        loadQuestion();
         
     }//GEN-LAST:event_nextButtonActionPerformed
+
+    private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousButtonActionPerformed
+        // TODO add your handling code here:
+        numQuestion--;
+        loadQuestion();
+    }//GEN-LAST:event_previousButtonActionPerformed
+
+    private void nextButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextButtonMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_nextButtonMouseClicked
 
     /**
      * @param args the command line arguments

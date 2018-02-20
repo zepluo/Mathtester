@@ -66,7 +66,7 @@ public class startPanel extends javax.swing.JPanel {
         dialog.add(new openPanel(main));
         dialog.pack();
         dialog.setVisible(true);
-        main.setDisplayPanel(new Stopwatch(23,main));
+        //main.setDisplayPanel(new Stopwatch(23,main));
     }//GEN-LAST:event_loadTestActionPerformed
 
 

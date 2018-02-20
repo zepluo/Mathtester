@@ -41,8 +41,10 @@ public class Questions {
         userAnswer = "";
         this.choices=null;
         
-        
-            
+    }
+    public String getUserAnswer()
+    {
+        return userAnswer;
     }
     public String getCorrectAnswer()
     {
@@ -81,9 +83,6 @@ public class Questions {
         imageFile=file;
     }
     
-    public String getUserAnswer()
-    {
-        return userAnswer;
-    }
+   
     
 }

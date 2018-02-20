@@ -32,9 +32,15 @@ public class FRQPanel extends javax.swing.JPanel {
         stemTextField.setText(cur.getStem());
         difficulty.setText(cur.getDifficulty()+"");
          name.setText(""+(frame.numQuestion+1));
+        submitButton.setEnabled(false);
+        String answer = cur.getUserAnswer();
+        if(!(answer.equals("")))
+        {
+            answerArea.setText(answer);
+            submitButton.setEnabled(true);
+        }       
         
-      
-        
+             
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,16 +59,27 @@ public class FRQPanel extends javax.swing.JPanel {
         difficulty = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(500, 415));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitButtonActionPerformed(evt);
             }
         });
+        add(submitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 287, -1, -1));
 
         answerArea.setColumns(20);
         answerArea.setRows(5);
+        answerArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                answerAreaKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(answerArea);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 220, 339, -1));
 
         stemTextField.setText("jTextField1");
         stemTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -70,58 +87,16 @@ public class FRQPanel extends javax.swing.JPanel {
                 stemTextFieldActionPerformed(evt);
             }
         });
+        add(stemTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 83, 339, 109));
 
         jLabel1.setText("jLabel1");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 40, 250, 229));
 
         difficulty.setText("jLabel2");
+        add(difficulty, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 292, -1, -1));
 
         name.setText("jLabel2");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(name))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(stemTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(submitButton))
-                .addContainerGap(86, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(difficulty)
-                .addGap(276, 276, 276))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(name)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(stemTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(submitButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(difficulty)
-                .addGap(77, 77, 77))
-        );
+        add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 6, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
@@ -129,13 +104,18 @@ public class FRQPanel extends javax.swing.JPanel {
         String answer = answerArea.getText();
         frame.questionList.get(frame.numQuestion).setUserAnswer(answer);
         frame.numQuestion++;
-        
+        frame.numQuestionDone++;
         frame.loadQuestion();
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void stemTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stemTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_stemTextFieldActionPerformed
+
+    private void answerAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_answerAreaKeyTyped
+        // TODO add your handling code here:
+        submitButton.setEnabled(true);
+    }//GEN-LAST:event_answerAreaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
