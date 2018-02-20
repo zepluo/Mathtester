@@ -62,10 +62,13 @@ public class startPanel extends javax.swing.JPanel {
 
     private void loadTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestActionPerformed
         // TODO add your handling code here:
-        JDialog dialog = new JDialog(main, true);
-        dialog.add(new openPanel(main));
-        dialog.pack();
-        dialog.setVisible(true);
+        //for testing only
+        //JDialog dialog = new JDialog(main, true);
+        //dialog.add(new openPanel(main));
+        //dialog.pack();
+        //dialog.setVisible(true);
+        main.filePath = "Files/Questions/data.txt";
+                main.load();
         //main.setDisplayPanel(new Stopwatch(23,main));
     }//GEN-LAST:event_loadTestActionPerformed
 
