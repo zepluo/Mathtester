@@ -10,6 +10,7 @@ import GUI.FRQPanel;
 import GUI.MCPanel;
 import GUI.endPanel;
 import GUI.pausePanel;
+import GUI.reviewPanel;
 import GUI.startPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -215,17 +216,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
         else
         {
-            int n = JOptionPane.showConfirmDialog(this,
-                    "Wuold you like to finish your test", "Finish",
-                    JOptionPane.YES_NO_OPTION);
-            switch (n) {
-                case 0:
-                    setQuestionPanel(new endPanel(this));
-                    disableButtons();
-                case 1:
-                   
-            }
             
+                    setQuestionPanel(new reviewPanel(this));
+                    disableButtons();
+           
         }
         bar.setValue(getNumQuestionDone());
         bar.setString(""+getNumQuestionDone() +"of "+questionList.size());
