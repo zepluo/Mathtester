@@ -9,6 +9,7 @@ import DataStructure.Questions;
 import GUI.FRQPanel;
 import GUI.MCPanel;
 import GUI.endPanel;
+import GUI.pausePanel;
 import GUI.startPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -35,7 +36,8 @@ public class MainFrame extends javax.swing.JFrame {
     public int numQuestion;
     public int numQuestionDone;
     public int timeInSeconds;
-    
+    public Stopwatch stopwatch;
+    public String text;
     public boolean finishBeforeTime=false;
     public static final int EASY = 0;
     public static final int MEDIUM = 1;
@@ -43,7 +45,7 @@ public class MainFrame extends javax.swing.JFrame {
     public static final int UNKNOWN=-1;
     public static final int MULTIPLECHOICE=0;
     public static final int FREERESPONSE = 1;
-   
+    
     
     public MainFrame() {
         initComponents();
@@ -77,6 +79,19 @@ public class MainFrame extends javax.swing.JFrame {
         questionPanel.add(panel, BorderLayout.CENTER);
         }
         
+       public int getNumQuestionDone()
+       {
+           int numAnswered=0;
+           for(int i=0;i<questionList.size();i++)
+           {
+               Questions cur = questionList.get(i);
+               if(!cur.getUserAnswer().equals(""))
+               {
+                   numAnswered ++;
+               }
+           }
+           return numAnswered;
+       }
     //read the question from data.txt.
     public void load() {
         System.out.println(filePath);
@@ -153,8 +168,8 @@ public class MainFrame extends javax.swing.JFrame {
             bar.setMaximum(questionList.size());
             bar.setStringPainted(true);
             
-            sortQuestions();
-            loadQuestion();
+           
+            
             
         
         
@@ -206,20 +221,26 @@ public class MainFrame extends javax.swing.JFrame {
             switch (n) {
                 case 0:
                     setQuestionPanel(new endPanel(this));
-                    previousButton.setEnabled(false);
-                    nextButton.setEnabled(false);
+                    disableButtons();
                 case 1:
                    
             }
             
         }
-        bar.setValue(numQuestionDone);
-        bar.setString(""+numQuestionDone +"of "+questionList.size());
+        bar.setValue(getNumQuestionDone());
+        bar.setString(""+getNumQuestionDone() +"of "+questionList.size());
     }
-    
-    public void nextQuestion()
+    public void disableButtons()
     {
-        
+         previousButton.setEnabled(false);
+          nextButton.setEnabled(false);
+    }
+    public void resume()
+    {
+        loadQuestion();
+        Stopwatch stopwatch =new Stopwatch(this);
+        this.stopwatch=stopwatch;
+        setDisplayPanel(stopwatch);
     }
     
     public void previousQuestion()
@@ -255,10 +276,12 @@ public class MainFrame extends javax.swing.JFrame {
         displayPanel = new javax.swing.JPanel();
         nextButton = new javax.swing.JButton();
         previousButton = new javax.swing.JButton();
+        pauseButton = new javax.swing.JButton();
         MenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         importTestMenuItem = new javax.swing.JMenuItem();
         saveMyResponseMenuItem = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         EditMenu = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -326,6 +349,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        pauseButton.setText("Pause");
+        pauseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pauseButtonActionPerformed(evt);
+            }
+        });
+
         fileMenu.setText("File");
 
         importTestMenuItem.setText("import test");
@@ -333,6 +363,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         saveMyResponseMenuItem.setText("Save my response");
         fileMenu.add(saveMyResponseMenuItem);
+
+        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem2);
 
         MenuBar.add(fileMenu);
 
@@ -353,7 +391,9 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(previousButton)
                         .addGap(32, 32, 32)
                         .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
+                        .addGap(36, 36, 36)
+                        .addComponent(pauseButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                         .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(questionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -368,7 +408,8 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(displayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(previousButton)
-                        .addComponent(nextButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(nextButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pauseButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(questionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -399,6 +440,21 @@ public class MainFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_nextButtonMouseClicked
 
+    private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseButtonActionPerformed
+        // TODO add your handling code here:
+        setQuestionPanel(new pausePanel(this));
+        text=stopwatch.getDispalyPanel().getText();
+        stopwatch.stop();
+        disableButtons();
+        
+        
+        
+    }//GEN-LAST:event_pauseButtonActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -424,7 +480,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem importTestMenuItem;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JButton nextButton;
+    private javax.swing.JButton pauseButton;
     private javax.swing.JButton previousButton;
     private javax.swing.JPanel questionPanel;
     private javax.swing.JMenuItem saveMyResponseMenuItem;

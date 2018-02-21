@@ -218,10 +218,11 @@ public class MCPanel extends javax.swing.JPanel {
         String choice=buttonGroup1.getSelection().getActionCommand();
         
         System.out.print(choice);
+        System.out.println("question:"+frame.numQuestion);
         frame.questionList.get(frame.numQuestion).setUserAnswer(choice);
-                
+        System.out.println("question:"+frame.numQuestion);
         frame.numQuestion++;
-        frame.numQuestionDone++;
+        
         frame.loadQuestion();
         
     }//GEN-LAST:event_submitButtonActionPerformed

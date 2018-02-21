@@ -8,15 +8,19 @@ Why
 2,3,4,5
 A
 Hard
+FRQ
+abc
+ccs
+easy
+FRQ
+abc
+ccs
+hard
 MC
 WHAT
 4,5,6,6
 A
 hard
-FRQ
-abc
-ccs
-easy
         
         
         

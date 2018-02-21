@@ -8,6 +8,7 @@ package GUI;
 import Main.MainFrame;
 import Main.Stopwatch;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -68,8 +69,20 @@ public class startPanel extends javax.swing.JPanel {
         //dialog.pack();
         //dialog.setVisible(true);
         main.filePath = "Files/Questions/data.txt";
-                main.load();
-        //main.setDisplayPanel(new Stopwatch(23,main));
+        main.load();
+        int n = JOptionPane.showConfirmDialog(main,
+                    "Wuold you like to sort the questions from easy to difficult", "sort",
+                    JOptionPane.YES_NO_OPTION);
+            switch (n) {
+                case 0:
+                    main.sortQuestions();
+                case 1:
+                   
+            }
+        main.loadQuestion();
+        Stopwatch stopwatch = new Stopwatch(50, main);
+        main.stopwatch=stopwatch;
+        main.setDisplayPanel(stopwatch);
     }//GEN-LAST:event_loadTestActionPerformed
 
 

@@ -104,7 +104,7 @@ public class FRQPanel extends javax.swing.JPanel {
         String answer = answerArea.getText();
         frame.questionList.get(frame.numQuestion).setUserAnswer(answer);
         frame.numQuestion++;
-        frame.numQuestionDone++;
+        
         frame.loadQuestion();
     }//GEN-LAST:event_submitButtonActionPerformed
 

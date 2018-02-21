@@ -11,6 +11,9 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import GUI.endPanel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -29,9 +32,36 @@ public class Stopwatch extends javax.swing.JPanel {
         this.frame=frame;
         
     }
+    public Stopwatch(MainFrame frame) {
+        initComponents();
+        go();
+
+        this.frame=frame;
+        
+    }
+    public JTextField getDispalyPanel()
+    {
+        return display;
+    }
     static int interval;
 static Timer timer;
 
+public void stop(){
+    timer.cancel();
+    String text =frame.text;
+    int inter=0;
+    while(!text.equals(getElapsedTimeHoursMinutesFromMilliseconds(inter*1000)))
+    {
+        inter++;
+        
+    }
+    
+    interval=inter;
+    System.out.println(interval);
+ 
+    
+}
+      
 public void go() {
     
     int secs=100;
@@ -39,8 +69,7 @@ public void go() {
     int period = 1000;
     timer = new Timer();
     String stop;
-    
-    timer.scheduleAtFixedRate(new TimerTask() {
+    TimerTask t= new TimerTask() {
 
         @Override
         public void run() {
@@ -65,15 +94,21 @@ public void go() {
             }
             if(interval==0)
             {
-                frame.setQuestionPanel(new endPanel(frame));
-            }
+                    int n = JOptionPane.showConfirmDialog(frame,
+                            "Time is up click OK to go to your score", "Finish",
+                            JOptionPane.INFORMATION_MESSAGE);
+                       
+                    frame.setQuestionPanel(new endPanel(frame));
+                    frame.disableButtons();
+                }
             }
             
             
 
         }
 
-    }, delay, period);}
+    };
+    timer.scheduleAtFixedRate(t, delay, period);}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -132,4 +167,6 @@ public static String getElapsedTimeHoursMinutesFromMilliseconds(long millisecond
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField display;
     // End of variables declaration//GEN-END:variables
+
+   
 }
