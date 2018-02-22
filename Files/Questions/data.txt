@@ -1,13 +1,13 @@
 MC
-How
-1,2,3,4
-A
-medium
+What is the distance in space between the points with coordinates ( - 3 ,6 ,7) and ( 2,- 1 ,4 )?
+4.36,5.92,9.11,22.25
+C
+easy
 MC
-Why
-2,3,4,5
-A
-Hard
+Alison deposits $ 500 into a new savings account that earns 5 percent interest compounded annually. If Alison makes no additional deposits or withdrawals, how many years will it take for the amount in the account to double?
+14,15,19,20
+B
+medium
 FRQ
 abc
 ccs
@@ -17,9 +17,9 @@ abc
 ccs
 hard
 MC
-WHAT
-4,5,6,6
-A
+A right circular cylinder has radius 3 and height 3. If A and B are two points on its surface, what is the maximum possible straight-line distance between A and B?
+3,5,6,6
+B
 hard
         
         

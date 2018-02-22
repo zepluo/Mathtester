@@ -29,8 +29,8 @@ public class FRQPanel extends javax.swing.JPanel {
         
         Questions cur = frame.questionList.get(frame.numQuestion);
      
-        stemTextField.setText(cur.getStem());
-        difficulty.setText(cur.getDifficulty()+"");
+        stemTextField.setText(cur.getStem());        
+        
          name.setText(""+(frame.numQuestion+1));
         submitButton.setEnabled(false);
         String answer = cur.getUserAnswer();
@@ -56,7 +56,6 @@ public class FRQPanel extends javax.swing.JPanel {
         answerArea = new javax.swing.JTextArea();
         stemTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        difficulty = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(500, 415));
@@ -92,9 +91,6 @@ public class FRQPanel extends javax.swing.JPanel {
         jLabel1.setText("jLabel1");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 40, 250, 229));
 
-        difficulty.setText("jLabel2");
-        add(difficulty, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 292, -1, -1));
-
         name.setText("jLabel2");
         add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 6, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -120,7 +116,6 @@ public class FRQPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea answerArea;
-    private javax.swing.JLabel difficulty;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel name;
