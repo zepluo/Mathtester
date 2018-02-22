@@ -228,7 +228,6 @@ public class MainFrame extends javax.swing.JFrame {
     {
          previousButton.setEnabled(false);
           nextButton.setEnabled(false);
-          pauseButton.setEnabled(false);
     }
     public void resume()
     {
