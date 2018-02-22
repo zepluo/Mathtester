@@ -131,7 +131,8 @@ public class MainFrame extends javax.swing.JFrame {
                         difficulty = HARD;
                     }
                  
-                    questionList.add(new Questions(MULTIPLECHOICE, difficulty, stem, answerChoices,correctAnswer));
+                    String imageString = "Files/Pictures/"+loadFile.readLine();
+                    questionList.add(new Questions(MULTIPLECHOICE, difficulty, stem, answerChoices,correctAnswer,imageString));
                     
                     System.out.println("ADD one");
                 }
@@ -228,6 +229,10 @@ public class MainFrame extends javax.swing.JFrame {
     {
          previousButton.setEnabled(false);
           nextButton.setEnabled(false);
+    }
+    public void disablePause()
+    {
+        pauseButton.setEnabled(false);
     }
     public void resume()
     {

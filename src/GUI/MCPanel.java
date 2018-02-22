@@ -7,6 +7,7 @@ package GUI;
 
 import DataStructure.Questions;
 import Main.MainFrame;
+import java.awt.BorderLayout;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
@@ -69,6 +70,13 @@ public class MCPanel extends javax.swing.JPanel {
             submitButton.setEnabled(true); 
             
         }
+        
+        ImageIcon image = new ImageIcon(cur.getImageFile());
+        JLabel imageL = new JLabel(image);
+        imagePanel.setLayout(new BorderLayout());
+            imagePanel.updateUI();
+           imagePanel.removeAll();
+        imagePanel.add(imageL,BorderLayout.CENTER);
             
                 
         
@@ -91,10 +99,10 @@ public class MCPanel extends javax.swing.JPanel {
         B = new javax.swing.JRadioButton();
         C = new javax.swing.JRadioButton();
         D = new javax.swing.JRadioButton();
-        imageLabel = new javax.swing.JLabel();
         submitButton = new javax.swing.JButton();
         stemTextField = new javax.swing.JTextField();
         name = new javax.swing.JLabel();
+        imagePanel = new javax.swing.JPanel();
 
         buttonGroup1.add(A);
         A.setText("jRadioButton1");
@@ -128,8 +136,6 @@ public class MCPanel extends javax.swing.JPanel {
             }
         });
 
-        imageLabel.setText("jLabel2");
-
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +146,17 @@ public class MCPanel extends javax.swing.JPanel {
         stemTextField.setText("jTextField1");
 
         name.setText("jLabel1");
+
+        javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
+        imagePanel.setLayout(imagePanelLayout);
+        imagePanelLayout.setHorizontalGroup(
+            imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 185, Short.MAX_VALUE)
+        );
+        imagePanelLayout.setVerticalGroup(
+            imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 191, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -161,21 +178,19 @@ public class MCPanel extends javax.swing.JPanel {
                             .addComponent(stemTextField)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(name)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addComponent(name)))
+                .addGap(45, 45, 45)
+                .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(name)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(name)
-                        .addGap(18, 18, 18)
                         .addComponent(stemTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +201,7 @@ public class MCPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(C))
                             .addComponent(submitButton, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(D)
                 .addGap(9, 9, 9))
@@ -239,7 +254,7 @@ public class MCPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton C;
     private javax.swing.JRadioButton D;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel imageLabel;
+    private javax.swing.JPanel imagePanel;
     private javax.swing.JLabel name;
     private javax.swing.JTextField stemTextField;
     private javax.swing.JButton submitButton;

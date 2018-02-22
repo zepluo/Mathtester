@@ -22,7 +22,7 @@ public class Questions {
     public static final int MULTIPLECHOICE=0;
     public static final int FREERESPONSE = 1;
    
-    public Questions(int type, int difficulty, String stem, String[] choices, String correctAnswer)
+    public Questions(int type, int difficulty, String stem, String[] choices, String correctAnswer,String imageFile)
     {
        this.difficulty = difficulty;
        this.stem = stem;
