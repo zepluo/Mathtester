@@ -40,7 +40,7 @@ public class MCPanel extends javax.swing.JPanel {
         B.setText(cur.getchoices()[1]);
         C.setText(cur.getchoices()[2]);
         D.setText(cur.getchoices()[3]);
-        stemTextField.setText(cur.getStem());
+        stemTextArea.setText(cur.getStem());
         
         name.setText(""+(frame.numQuestion+1));
         submitButton.setEnabled(false);  
@@ -100,9 +100,10 @@ public class MCPanel extends javax.swing.JPanel {
         C = new javax.swing.JRadioButton();
         D = new javax.swing.JRadioButton();
         submitButton = new javax.swing.JButton();
-        stemTextField = new javax.swing.JTextField();
         name = new javax.swing.JLabel();
         imagePanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        stemTextArea = new javax.swing.JTextArea();
 
         buttonGroup1.add(A);
         A.setText("jRadioButton1");
@@ -143,8 +144,6 @@ public class MCPanel extends javax.swing.JPanel {
             }
         });
 
-        stemTextField.setText("jTextField1");
-
         name.setText("jLabel1");
 
         javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
@@ -157,6 +156,11 @@ public class MCPanel extends javax.swing.JPanel {
             imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 191, Short.MAX_VALUE)
         );
+
+        stemTextArea.setColumns(20);
+        stemTextArea.setLineWrap(true);
+        stemTextArea.setRows(5);
+        jScrollPane1.setViewportView(stemTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -171,15 +175,19 @@ public class MCPanel extends javax.swing.JPanel {
                                 .addComponent(C)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(submitButton)
-                                .addGap(69, 69, 69))
+                                .addGap(114, 114, 114))
                             .addComponent(A)
                             .addComponent(B)
-                            .addComponent(D)
-                            .addComponent(stemTextField)))
+                            .addComponent(D)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(name)))
-                .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(name))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
@@ -191,8 +199,8 @@ public class MCPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(stemTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(A)
@@ -255,8 +263,9 @@ public class MCPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton D;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel imagePanel;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel name;
-    private javax.swing.JTextField stemTextField;
+    private javax.swing.JTextArea stemTextArea;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -128,7 +128,7 @@ public class MainFrame extends javax.swing.JFrame {
                     }
                     else if(dif.equalsIgnoreCase("HARD"))
                     {
-                        difficulty = HARD;
+                        difficulty = HARD; 
                     }
                  
                     String imageString = "Files/Pictures/"+loadFile.readLine();
