@@ -35,6 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
     public ArrayList<Questions> questionList;
     public String filePath;
     public int numQuestion;
+    
     public int numQuestionDone;
     public int timeInSeconds;
     public Stopwatch stopwatch;

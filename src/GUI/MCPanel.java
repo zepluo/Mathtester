@@ -232,6 +232,7 @@ public class MCPanel extends javax.swing.JPanel {
         
         System.out.print(choice);
         System.out.println("question:"+frame.numQuestion);
+        //record answer
         frame.questionList.get(frame.numQuestion).setUserAnswer(choice);
         System.out.println("question:"+frame.numQuestion);
         frame.numQuestion++;
