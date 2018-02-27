@@ -32,7 +32,7 @@ public class Questions {
        userAnswer = "";
        this.imageFile=imageFile;
     }
-    public Questions(int type, String stem, String correctAnswer,int difficulty)
+    public Questions(int type, String stem, String correctAnswer,int difficulty, String imageFile)
     {
         this.type =type;
         this.difficulty = difficulty;
@@ -40,6 +40,7 @@ public class Questions {
         this.correctAnswer = correctAnswer;
         userAnswer = "";
         this.choices=null;
+        this.imageFile=imageFile;
         
     }
     public String getUserAnswer()

@@ -67,9 +67,10 @@ public class MainFrame extends javax.swing.JFrame {
             displayPanel.setLayout(new BorderLayout());
             displayPanel.updateUI();
             displayPanel.removeAll();
-            
+      
             displayPanel.add(panel,BorderLayout.CENTER);
         }
+       
            
        public void setQuestionPanel(JPanel panel)
        {
@@ -154,7 +155,8 @@ public class MainFrame extends javax.swing.JFrame {
                     {
                         difficulty = HARD;
                     }
-                    questionList.add(new Questions(FREERESPONSE,stem,correctAnswer,difficulty) );
+                    String imageString = "Files/Pictures/"+loadFile.readLine();
+                    questionList.add(new Questions(FREERESPONSE,stem,correctAnswer,difficulty, imageString) );
                     
                 }
 
