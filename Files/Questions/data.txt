@@ -1,9 +1,8 @@
 MC
-What is the distance in space between the points with coordinates ( - 3 ,6 ,7) and ( 2,- 1 ,4 )?
-4.36,5.92,9.11,22.25
+What is the value of integral?
 C
 easy
-q1.jpg
+q2.gif
 MC
 Alison deposits $ 500 into a new savings account that earns 5 percent interest compounded annually. If Alison makes no additional deposits or withdrawals, how many years will it take for the amount in the account to double?
 14,15,19,20
