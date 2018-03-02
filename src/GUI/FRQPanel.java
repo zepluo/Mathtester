@@ -7,6 +7,9 @@ package GUI;
 
 import DataStructure.Questions;
 import Main.MainFrame;
+import java.awt.BorderLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -39,6 +42,13 @@ public class FRQPanel extends javax.swing.JPanel {
             answerArea.setText(answer);
             submitButton.setEnabled(true);
         }       
+         ImageIcon image = new ImageIcon(cur.getImageFile());
+        JLabel imageL = new JLabel(image);
+        imagePanel.setLayout(new BorderLayout());
+            imagePanel.updateUI();
+           imagePanel.removeAll();
+        imagePanel.add(imageL,BorderLayout.CENTER);
+            
         
              
     }
@@ -55,8 +65,8 @@ public class FRQPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         answerArea = new javax.swing.JTextArea();
         stemTextField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
+        imagePanel = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(500, 415));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -88,11 +98,9 @@ public class FRQPanel extends javax.swing.JPanel {
         });
         add(stemTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 83, 339, 109));
 
-        jLabel1.setText("jLabel1");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 40, 250, 229));
-
         name.setText("jLabel2");
         add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 6, -1, -1));
+        add(imagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 230, 220));
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
@@ -116,7 +124,7 @@ public class FRQPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea answerArea;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel imagePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel name;
     private javax.swing.JTextField stemTextField;

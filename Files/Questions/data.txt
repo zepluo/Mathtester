@@ -1,6 +1,7 @@
 MC
 What is the value of integral?
-C
+C,j,j,j
+c
 easy
 q2.gif
 MC
