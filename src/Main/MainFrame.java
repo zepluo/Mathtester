@@ -6,6 +6,7 @@
 package Main;
 
 import DataStructure.Questions;
+import DataStructure.test;
 import GUI.FRQPanel;
 import GUI.MCPanel;
 import GUI.endPanel;
@@ -31,16 +32,17 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    
+    public test currentTest;
     public ArrayList<Questions> questionList;
     public String filePath;
-    public int numQuestion;
     
+    public int numQuestion;
     public int numQuestionDone;
     public int timeInSeconds;
     public Stopwatch stopwatch;
     public String text;
-    public boolean finishBeforeTime=false;
+   
+    public boolean finishBeforeTime;
     public static final int EASY = 0;
     public static final int MEDIUM = 1;
     public static final int HARD =2;
@@ -52,12 +54,13 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
        // load();
-       numQuestion=0;
+        numQuestion=0;
         
         questionList = new ArrayList<Questions>();
         //test
         previousButton.setEnabled(false);
         nextButton.setEnabled(false);
+        pauseButton.setEnabled(false);
         setQuestionPanel(new startPanel(this));
         
         
@@ -96,19 +99,35 @@ public class MainFrame extends javax.swing.JFrame {
            return numAnswered;
        }
     //read the question from data.txt.
-    public void load() {
-        System.out.println(filePath);
+    public void loadTest() {
+        finishBeforeTime=false;
+        ArrayList<Questions> testQuestionList = new ArrayList<Questions>();
+        
                 try {
             // Load file and read info to RAM from file
             BufferedReader loadFile = new BufferedReader(new FileReader(
                     filePath));
-
+            String testName=loadFile.readLine();
+            String testWriter=loadFile.readLine();
+            int time=Integer.parseInt(loadFile.readLine());
+            currentTest=new test(testName,testWriter);
+            
+            currentTest.setTime(time);
+            currentTest.setList(testQuestionList);
+            timeInSeconds=time;
+            questionList=testQuestionList;
+            numQuestion=0;
+            numQuestionDone=0;
             String input;
+            
+            
             // Continue to read in from text file 2 lines for each athlete
             // while there are still line to be read in
             // First line is their personal info
             // Second line is their goal data
             while ((input = loadFile.readLine()) != null) {
+                
+                
                 String type = input;
 
                 if(type.equalsIgnoreCase("MC"))
@@ -118,46 +137,22 @@ public class MainFrame extends javax.swing.JFrame {
                     input = loadFile.readLine();
                     String[] answerChoices = input.split(",");
                     String correctAnswer=loadFile.readLine();
-                    String dif = loadFile.readLine();
-                    int difficulty = UNKNOWN;
-                    if(dif.equalsIgnoreCase("easy"))
-                    {
-                        difficulty = EASY;
-                    }
-                    else if(dif.equalsIgnoreCase("medium"))
-                    {
-                        difficulty=MEDIUM;
-                    }
-                    else if(dif.equalsIgnoreCase("HARD"))
-                    {
-                        difficulty = HARD; 
-                    }
-                 
-                    String imageString = "Files/Pictures/"+loadFile.readLine();
-                    questionList.add(new Questions(MULTIPLECHOICE, difficulty, stem, answerChoices,correctAnswer,imageString));
+                   
+                    int difficulty = Integer.parseInt(loadFile.readLine());
                     
-                    System.out.println("ADD one");
+                 
+                    String imageString = loadFile.readLine();
+                    testQuestionList.add(new Questions(MULTIPLECHOICE, difficulty, stem, answerChoices,correctAnswer,imageString));
+              
                 }
                 else if(type.equalsIgnoreCase("FRQ"))
                 {
                     String stem = loadFile.readLine();
                     String correctAnswer = loadFile.readLine();
-                    String dif = loadFile.readLine();
-                    int difficulty = UNKNOWN;
-                    if(dif.equalsIgnoreCase("easy"))
-                    {
-                        difficulty = EASY;
-                    }
-                    else if(dif.equalsIgnoreCase("medium"))
-                    {
-                        difficulty=MEDIUM;
-                    }
-                    else if(dif.equalsIgnoreCase("HARD"))
-                    {
-                        difficulty = HARD;
-                    }
-                    String imageString = "Files/Pictures/"+loadFile.readLine();
-                    questionList.add(new Questions(FREERESPONSE,stem,correctAnswer,difficulty, imageString) );
+                    
+                    int difficulty = Integer.parseInt(loadFile.readLine());
+                    String imageString = loadFile.readLine();
+                    testQuestionList.add(new Questions(FREERESPONSE,stem,correctAnswer,difficulty, imageString) );
                     
                 }
 
@@ -172,7 +167,9 @@ public class MainFrame extends javax.swing.JFrame {
                 //load question panel
             bar.setMaximum(questionList.size());
             bar.setStringPainted(true);
-            
+          
+          
+           
            
             
             
@@ -210,6 +207,8 @@ public class MainFrame extends javax.swing.JFrame {
         }
         previousButton.setEnabled(true);
         nextButton.setEnabled(true);
+        pauseButton.setEnabled(true);
+        
         if (numQuestion < questionList.size()) {
             int type = questionList.get(numQuestion).getType();
             if (type == MULTIPLECHOICE) {
@@ -232,6 +231,7 @@ public class MainFrame extends javax.swing.JFrame {
     {
          previousButton.setEnabled(false);
           nextButton.setEnabled(false);
+          pauseButton.setEnabled(false);
     }
     public void disablePause()
     {
@@ -244,10 +244,9 @@ public class MainFrame extends javax.swing.JFrame {
         this.stopwatch=stopwatch;
         setDisplayPanel(stopwatch);
     }
-    
-    public void previousQuestion()
+    public void disableDisplayPanel()
     {
-        
+        displayPanel.setVisible(false);
     }
     public JProgressBar getBar()
     {
@@ -395,7 +394,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
                         .addComponent(pauseButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                         .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(questionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -405,13 +404,14 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(bar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                        .addComponent(displayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(previousButton)
                         .addComponent(nextButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pauseButton)))
+                        .addComponent(pauseButton))
+                    .addComponent(displayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(questionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );

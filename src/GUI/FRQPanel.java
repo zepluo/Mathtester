@@ -34,7 +34,7 @@ public class FRQPanel extends javax.swing.JPanel {
      
         stemTextField.setText(cur.getStem());        
         
-         name.setText(""+(frame.numQuestion+1));
+         name.setText(""+(frame.numQuestion+1)+"\n"+frame.currentTest.getTestName());
         submitButton.setEnabled(false);
         String answer = cur.getUserAnswer();
         if(!(answer.equals("")))
@@ -43,6 +43,7 @@ public class FRQPanel extends javax.swing.JPanel {
             submitButton.setEnabled(true);
         }       
          ImageIcon image = new ImageIcon(cur.getImageFile());
+         System.out.println(cur.getImageFile());
         JLabel imageL = new JLabel(image);
         imagePanel.setLayout(new BorderLayout());
             imagePanel.updateUI();

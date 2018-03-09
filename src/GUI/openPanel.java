@@ -74,9 +74,8 @@ public class openPanel extends javax.swing.JPanel {
         }
         else
         {
-                //mainframe.filePath  = fileChooser.getSelectedFile().getAbsolutePath();
-                mainframe.filePath = "Files/Questions/data.txt";
-                mainframe.load();
+                mainframe.filePath  = fileChooser.getSelectedFile().getAbsolutePath();
+                
         }
                 ((JDialog) this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_fileChooserActionPerformed

@@ -1,3 +1,6 @@
+testname
+testwriter
+500
 MC
 What is the value of integral?
 C,j,j,j

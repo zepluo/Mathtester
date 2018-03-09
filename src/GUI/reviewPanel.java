@@ -38,7 +38,7 @@ public class reviewPanel extends javax.swing.JPanel {
         for (int x = 0; x < tableData.length; x++) {
             // Athlete Info
             tableData[x][0] = ""+(x+1);
-            tableData[x][1] = frame.questionList.get(x).getCorrectAnswer();
+            tableData[x][1] = frame.questionList.get(x).getUserAnswer();
            
                    
             

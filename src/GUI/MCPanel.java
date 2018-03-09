@@ -42,7 +42,7 @@ public class MCPanel extends javax.swing.JPanel {
         D.setText(cur.getchoices()[3]);
         stemTextArea.setText(cur.getStem());
         
-        name.setText(""+(frame.numQuestion+1));
+        name.setText(""+(frame.numQuestion+1)+"\n"+frame.currentTest.getTestName());
         submitButton.setEnabled(false);  
         String answer =cur.getUserAnswer();
         if(!(answer.equals("")))
@@ -70,7 +70,7 @@ public class MCPanel extends javax.swing.JPanel {
             submitButton.setEnabled(true); 
             
         }
-        
+         System.out.println(cur.getImageFile());
         ImageIcon image = new ImageIcon(cur.getImageFile());
         JLabel imageL = new JLabel(image);
         imagePanel.setLayout(new BorderLayout());
