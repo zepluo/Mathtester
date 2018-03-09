@@ -24,6 +24,8 @@ public class Stopwatch extends javax.swing.JPanel {
     /**
      * Creates new form Stopwatch
      */
+     int interval;
+     Timer timer;
     MainFrame frame;
     public Stopwatch(int interval,MainFrame frame) {
         initComponents();
@@ -43,8 +45,7 @@ public class Stopwatch extends javax.swing.JPanel {
     {
         return display;
     }
-    static int interval;
-static Timer timer;
+    
 
 public void stop(){
     timer.cancel();
@@ -76,34 +77,29 @@ public void go() {
             //display.setText(""+setInterval());
             
             
-            if(frame.finishBeforeTime)
-            {
+            if (frame.finishBeforeTime) {
                 display.setText("");
-            }
-            else   
-            {
-                String x = getElapsedTimeHoursMinutesFromMilliseconds(setInterval()*1000);
-                
-            display.setText(x);
-            if(interval<10)
-            {
-                Font font = new Font("Rockwell Condensed", Font.PLAIN, 25);
-                display.setFont(font);
-                display.setBackground(Color.BLUE);
-                
-            }
-            if(interval==0)
-            {
+            } else {
+                String x = getElapsedTimeHoursMinutesFromMilliseconds(setInterval() * 1000);
+
+                display.setText(x);
+                if (interval < 10) {
+                    Font font = new Font("Rockwell Condensed", Font.PLAIN, 25);
+                    display.setFont(font);
+                    display.setBackground(Color.BLUE);
+
+                }
+                if (interval == 0) {
                     int n = JOptionPane.showConfirmDialog(frame,
                             "Time is up click OK to go to your score", "Finish",
                             JOptionPane.INFORMATION_MESSAGE);
-                       
+
                     frame.setQuestionPanel(new endPanel(frame));
                     frame.disableButtons();
                 }
             }
-            
-            
+
+
 
         }
 
@@ -121,6 +117,11 @@ public void go() {
         display = new javax.swing.JTextField();
 
         display.setText("START");
+        display.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                displayActionPerformed(evt);
+            }
+        });
         display.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 displayPropertyChange(evt);
@@ -148,13 +149,17 @@ public void go() {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_displayPropertyChange
-private static int setInterval() {
+
+    private void displayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_displayActionPerformed
+private  int setInterval() {
     if (interval == 1)
-        timer.cancel();
+    { timer.cancel();}
     return --interval;
 }
 
-public static String getElapsedTimeHoursMinutesFromMilliseconds(long milliseconds) {
+public  String getElapsedTimeHoursMinutesFromMilliseconds(long milliseconds) {
         String format = String.format("%%0%dd", 2);
         long elapsedTime = milliseconds / 1000;
         String seconds = String.format(format, elapsedTime % 60);

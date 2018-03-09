@@ -100,6 +100,7 @@ public class MainFrame extends javax.swing.JFrame {
        }
     //read the question from data.txt.
     public void loadTest() {
+        displayPanel.setVisible(true);
         finishBeforeTime=false;
         ArrayList<Questions> testQuestionList = new ArrayList<Questions>();
         
