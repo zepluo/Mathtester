@@ -42,9 +42,10 @@ public class FRQPanel extends javax.swing.JPanel {
             answerArea.setText(answer);
             submitButton.setEnabled(true);
         }       
-         ImageIcon image = new ImageIcon(cur.getImageFile());
-         System.out.println(cur.getImageFile());
+         ImageIcon image = new ImageIcon(new ImageIcon(cur.getImageFile()).getImage().getScaledInstance(200, 200, 0));
+         System.out.println("FRQ panel loading imagefile..."+cur.getImageFile());
         JLabel imageL = new JLabel(image);
+        imageL.setSize(60, 60);
         imagePanel.setLayout(new BorderLayout());
             imagePanel.updateUI();
            imagePanel.removeAll();

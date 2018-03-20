@@ -37,6 +37,7 @@ public class startPanel extends javax.swing.JPanel {
         loadingPanel = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         loadTest = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout loadingPanelLayout = new javax.swing.GroupLayout(loadingPanel);
         loadingPanel.setLayout(loadingPanelLayout);
@@ -49,29 +50,18 @@ public class startPanel extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         loadTest.setText("loadTest");
         loadTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadTestActionPerformed(evt);
             }
         });
+        add(loadTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 255, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(286, Short.MAX_VALUE)
-                .addComponent(loadTest)
-                .addGap(16, 16, 16))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(255, Short.MAX_VALUE)
-                .addComponent(loadTest)
-                .addGap(16, 16, 16))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/zepingluo/Downloads/IMG_0397.JPG")); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestActionPerformed
@@ -101,6 +91,7 @@ public class startPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JButton loadTest;
     private javax.swing.JPanel loadingPanel;
