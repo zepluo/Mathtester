@@ -7,7 +7,9 @@ package GUI;
 
 import Main.MainFrame;
 import Main.Stopwatch;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,8 +25,16 @@ public class startPanel extends javax.swing.JPanel {
     public startPanel(MainFrame main) {
         initComponents();
         this.main=main;
+        load();
     }
-
+     private void load()
+     {
+        ImageIcon image = new ImageIcon(new ImageIcon(MainFrame.STARTPANELIMAGEFILE).getImage().getScaledInstance(520, 340, 300));
+       
+        coverImage.setIcon(image);
+        main.getBar().setVisible(false);
+        
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,6 +48,10 @@ public class startPanel extends javax.swing.JPanel {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         loadTest = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        nameField = new javax.swing.JTextField();
+        IDField = new javax.swing.JTextField();
+        coverImage = new javax.swing.JLabel();
 
         javax.swing.GroupLayout loadingPanelLayout = new javax.swing.GroupLayout(loadingPanel);
         loadingPanel.setLayout(loadingPanelLayout);
@@ -58,10 +72,22 @@ public class startPanel extends javax.swing.JPanel {
                 loadTestActionPerformed(evt);
             }
         });
-        add(loadTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 255, -1, -1));
+        add(loadTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/zepingluo/Downloads/IMG_0397.JPG")); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
+        jLabel1.setText("Name");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 50, 30));
+
+        jLabel2.setText("student ID");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 80, 30));
+        add(nameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 130, 40));
+
+        IDField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IDFieldActionPerformed(evt);
+            }
+        });
+        add(IDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 120, 40));
+        add(coverImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 340));
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestActionPerformed
@@ -87,13 +113,23 @@ public class startPanel extends javax.swing.JPanel {
         Stopwatch stopwatch = new Stopwatch(main.timeInSeconds, main);
         main.stopwatch=stopwatch;
         main.setDisplayPanel(stopwatch);
+        main.currentTest.setTesterInfo(nameField.getText(), IDField.getText());
+        
     }//GEN-LAST:event_loadTestActionPerformed
+
+    private void IDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IDFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField IDField;
+    private javax.swing.JLabel coverImage;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JButton loadTest;
     private javax.swing.JPanel loadingPanel;
+    private javax.swing.JTextField nameField;
     // End of variables declaration//GEN-END:variables
 }

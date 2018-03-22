@@ -17,6 +17,9 @@ public class test {
     private String testWriter;
     private int time;
     
+    private String studentName;
+    private String studentID;
+    
     public test()
     {
         this.testQuestionList=new ArrayList<Questions>();
@@ -35,6 +38,14 @@ public class test {
     {
         return time;
     }
+    public String getStudentName(){
+        return studentName;
+    }
+    public String getStudentID()
+    {
+        return studentID;
+    }
+    
     public void setTime(int hour)
     {
         time=hour;
@@ -58,6 +69,9 @@ public class test {
         return testWriter;
     }
           
-    
+    public void setTesterInfo(String sn,String sID){
+        this.studentID=sID;
+        this.studentName=sn;
+    }
     
 }

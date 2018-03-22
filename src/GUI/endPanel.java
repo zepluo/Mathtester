@@ -6,6 +6,8 @@
 package GUI;
 
 import Main.MainFrame;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import staticClasses.InfoTableModel;
 
 /**
@@ -93,6 +95,7 @@ public class endPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         reportTable = new javax.swing.JTable();
         newTestButton = new javax.swing.JButton();
+        downloadReportButton = new javax.swing.JButton();
 
         scoreFinal.setText("jLabel1");
 
@@ -116,6 +119,13 @@ public class endPanel extends javax.swing.JPanel {
             }
         });
 
+        downloadReportButton.setText("Download the Report");
+        downloadReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downloadReportButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,6 +139,10 @@ public class endPanel extends javax.swing.JPanel {
                 .addComponent(scoreFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(newTestButton))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(downloadReportButton)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +153,9 @@ public class endPanel extends javax.swing.JPanel {
                     .addComponent(newTestButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(downloadReportButton)
+                .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -150,8 +166,15 @@ public class endPanel extends javax.swing.JPanel {
          
     }//GEN-LAST:event_newTestButtonActionPerformed
 
+    private void downloadReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadReportButtonActionPerformed
+        // TODO add your handling code here:
+        frame.saveReport();
+        JOptionPane.showMessageDialog(frame, "Your report has been download to your desktop","Message", PLAIN_MESSAGE,null);
+    }//GEN-LAST:event_downloadReportButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton downloadReportButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton newTestButton;
     private javax.swing.JTable reportTable;

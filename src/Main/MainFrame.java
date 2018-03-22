@@ -16,8 +16,11 @@ import GUI.startPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -50,6 +53,9 @@ public class MainFrame extends javax.swing.JFrame {
     public static final int MULTIPLECHOICE=0;
     public static final int FREERESPONSE = 1;
     
+    //for start panel image path
+    public static final String STARTPANELIMAGEFILE ="/Users/zepingluo/Downloads/CBstart.jpg";
+    public static final String DEFAULTREPORTDOWNLOADDIRECTORY="/Users/zepingluo/desktop/";
     
     public MainFrame() {
         initComponents();
@@ -165,7 +171,8 @@ public class MainFrame extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
          
-                //load question panel
+                //load question panel'
+            bar.setVisible(true);
             bar.setMaximum(questionList.size());
             bar.setStringPainted(true);
           
@@ -228,6 +235,44 @@ public class MainFrame extends javax.swing.JFrame {
         bar.setValue(getNumQuestionDone());
         bar.setString(""+getNumQuestionDone() +"of "+questionList.size());
     }
+    public void saveReport()
+    {
+        try {
+              
+            PrintWriter writer = new PrintWriter(new File(DEFAULTREPORTDOWNLOADDIRECTORY+currentTest.getStudentName()+"scorereport"));
+
+            // Write the number of games to the file
+            writer.print("student Name:");
+            writer.println(currentTest.getStudentName());
+            writer.print("student ID:");
+            writer.println(currentTest.getStudentID());
+            writer.print("test Name:");
+            writer.println(currentTest.getTestName());
+            writer.println("");
+            writer.print("Score: ");
+            writer.print(getTotalRight());
+            writer.print("/");
+            writer.println(currentTest.getTestQuestionList().size());
+            
+            writer.println("Question Number        CorrectAnswer      YourAnswer  ");
+            for(int i=0;i<questionList.size();i++)
+            {
+                writer.print((i+1)+". ");
+               writer.print("                       "+questionList.get(i).getCorrectAnswer());
+                                           writer.println("              "+questionList.get(i).getUserAnswer());
+                                           
+            }
+           
+
+            
+
+            writer.close();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error trying to load file: " + ex,
+                    "Load Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
     public void disableButtons()
     {
          previousButton.setEnabled(false);
@@ -253,7 +298,19 @@ public class MainFrame extends javax.swing.JFrame {
     {
         return bar;
     }
-    
+    public int getTotalRight()
+    {
+        int totalright=0;
+        for(int x=0;x<questionList.size();x++)
+        {
+            if(questionList.get(x).getUserAnswer().equals(questionList.get(x).getCorrectAnswer())){
+            totalright++;
+        }
+        }
+        return totalright;
+    }
+           
+            
     /**
    
     
