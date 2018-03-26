@@ -8,6 +8,7 @@ package GUI;
 import Main.MainFrame;
 import java.io.File;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -24,7 +25,7 @@ public class openPanel extends javax.swing.JPanel {
         mainframe=data;
         
         fileChooser.setCurrentDirectory(new File("%USERPROFILE%/Desktop"));
-        
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     }
 
     /**
@@ -74,7 +75,7 @@ public class openPanel extends javax.swing.JPanel {
         }
         else
         {
-                mainframe.filePath  = fileChooser.getSelectedFile().getAbsolutePath();
+                mainframe.testFolderPath  = fileChooser.getSelectedFile().getAbsolutePath();
                 
         }
                 ((JDialog) this.getTopLevelAncestor()).dispose();

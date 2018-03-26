@@ -71,7 +71,7 @@ public class MCPanel extends javax.swing.JPanel {
             submitButton.setEnabled(true); 
             
         }
-         System.out.println(cur.getImageFile());
+        System.out.println(cur.getImageFile());
         image = new ImageIcon(new ImageIcon(cur.getImageFile()).getImage().getScaledInstance(200, 200, 0));
         System.out.println("MCPANEl loading imagefile...."+cur.getImageFile());
         JLabel imageL = new JLabel(image);

@@ -35,9 +35,11 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
+    public String testFolderPath;
+    public String testFilePath;
     public test currentTest;
     public ArrayList<Questions> questionList;
-    public String filePath;
+    
     
     public int numQuestion;
     public int numQuestionDone;
@@ -54,9 +56,11 @@ public class MainFrame extends javax.swing.JFrame {
     public static final int FREERESPONSE = 1;
     
     //for start panel image path
-    public static final String STARTPANELIMAGEFILE ="/Users/zepingluo/Downloads/CBstart.jpg";
+    public static final String STARTPANELIMAGEFILE ="Files/Pictures/CBstart.jpg";
     public static final String DEFAULTREPORTDOWNLOADDIRECTORY="/Users/zepingluo/desktop/";
-    
+    //public static final String STARTPANELIMAGEFILE ="/Users/zepingluo/Downloads/CBstart.jpg";
+    //public static final String DEFAULTREPORTDOWNLOADDIRECTORY="/Users/zepingluo/desktop/";
+   
     public MainFrame() {
         initComponents();
        // load();
@@ -108,26 +112,29 @@ public class MainFrame extends javax.swing.JFrame {
     public void loadTest() {
         displayPanel.setVisible(true);
         finishBeforeTime=false;
-        ArrayList<Questions> testQuestionList = new ArrayList<Questions>();
+        String[] filePath=testFolderPath.split("/");
+        testFilePath=testFolderPath+"/"+filePath[filePath.length-1];
         
                 try {
             // Load file and read info to RAM from file
             BufferedReader loadFile = new BufferedReader(new FileReader(
-                    filePath));
+                    testFilePath));
             String testName=loadFile.readLine();
             String testWriter=loadFile.readLine();
             int time=Integer.parseInt(loadFile.readLine());
-            currentTest=new test(testName,testWriter);
             
+            currentTest=new test(testName,testWriter);
             currentTest.setTime(time);
-            currentTest.setList(testQuestionList);
+            questionList= new ArrayList<Questions>();
+            currentTest.setList(questionList);
             timeInSeconds=time;
-            questionList=testQuestionList;
+          
             numQuestion=0;
             numQuestionDone=0;
             String input;
             
             
+                
             // Continue to read in from text file 2 lines for each athlete
             // while there are still line to be read in
             // First line is their personal info
@@ -148,8 +155,7 @@ public class MainFrame extends javax.swing.JFrame {
                     int difficulty = Integer.parseInt(loadFile.readLine());
                     
                  
-                    String imageString = loadFile.readLine();
-                    testQuestionList.add(new Questions(MULTIPLECHOICE, difficulty, stem, answerChoices,correctAnswer,imageString));
+                    questionList.add(new Questions(MULTIPLECHOICE, difficulty, stem, answerChoices,correctAnswer));
               
                 }
                 else if(type.equalsIgnoreCase("FRQ"))
@@ -158,8 +164,8 @@ public class MainFrame extends javax.swing.JFrame {
                     String correctAnswer = loadFile.readLine();
                     
                     int difficulty = Integer.parseInt(loadFile.readLine());
-                    String imageString = loadFile.readLine();
-                    testQuestionList.add(new Questions(FREERESPONSE,stem,correctAnswer,difficulty, imageString) );
+                 
+                    questionList.add(new Questions(FREERESPONSE,stem,correctAnswer,difficulty) );
                     
                 }
 
@@ -175,15 +181,16 @@ public class MainFrame extends javax.swing.JFrame {
             bar.setVisible(true);
             bar.setMaximum(questionList.size());
             bar.setStringPainted(true);
-          
-          
-           
-           
+            //Searching for pic
             
-            
-        
-        
-        
+            for(int i=1;i<=questionList.size();i++){
+                File file = new File(testFolderPath+"/"+"q"+i+".jpg");
+                if(file.exists())
+                {
+                    
+                    questionList.get(i-1).setImageFile(file.getAbsolutePath());
+                }
+            }
   }
     
     //sort difficulty.
@@ -366,7 +373,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         questionPanelLayout.setVerticalGroup(
             questionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 501, Short.MAX_VALUE)
+            .addGap(0, 478, Short.MAX_VALUE)
         );
 
         bar.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
@@ -382,7 +389,7 @@ public class MainFrame extends javax.swing.JFrame {
         displayPanel.setLayout(displayPanelLayout);
         displayPanelLayout.setHorizontalGroup(
             displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 181, Short.MAX_VALUE)
+            .addGap(0, 153, Short.MAX_VALUE)
         );
         displayPanelLayout.setVerticalGroup(
             displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,35 +450,38 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(displayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(previousButton)
-                        .addGap(32, 32, 32)
-                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(pauseButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                        .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(questionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(questionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(displayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(previousButton)
+                .addGap(29, 29, 29)
+                .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(pauseButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(displayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(previousButton)
-                        .addComponent(nextButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pauseButton))
-                    .addComponent(displayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(previousButton)
+                                .addComponent(nextButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pauseButton)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(questionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(questionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
