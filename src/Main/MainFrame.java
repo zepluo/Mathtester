@@ -189,6 +189,7 @@ public class MainFrame extends javax.swing.JFrame {
                 {
                     
                     questionList.get(i-1).setImageFile(file.getAbsolutePath());
+                    
                 }
             }
   }
