@@ -66,6 +66,9 @@ public class reviewPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(204, 204, 255));
+
+        reviewTable.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         reviewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -84,6 +87,7 @@ public class reviewPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(reviewTable);
 
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jButton1.setText("finish your test");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +95,7 @@ public class reviewPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel1.setText("click on the question to review");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

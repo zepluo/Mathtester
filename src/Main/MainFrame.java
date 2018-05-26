@@ -46,6 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
     public int timeInSeconds;
     public Stopwatch stopwatch;
     public String text;
+    public int interval;
    
     public boolean finishBeforeTime;
     public static final int EASY = 0;
@@ -72,7 +73,7 @@ public class MainFrame extends javax.swing.JFrame {
         nextButton.setEnabled(false);
         pauseButton.setEnabled(false);
         setQuestionPanel(new startPanel(this));
-        
+        this.getContentPane().setBackground(new Color(204,204,255));
         
     }
         public void setDisplayPanel(JPanel panel)
@@ -294,7 +295,7 @@ public class MainFrame extends javax.swing.JFrame {
     public void resume()
     {
         loadQuestion();
-        Stopwatch stopwatch =new Stopwatch(this);
+        Stopwatch stopwatch =new Stopwatch(interval,this);
         this.stopwatch=stopwatch;
         setDisplayPanel(stopwatch);
     }
@@ -366,6 +367,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        questionPanel.setBackground(new java.awt.Color(204, 204, 255));
+
         javax.swing.GroupLayout questionPanelLayout = new javax.swing.GroupLayout(questionPanel);
         questionPanel.setLayout(questionPanelLayout);
         questionPanelLayout.setHorizontalGroup(
@@ -386,6 +389,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        displayPanel.setBackground(new java.awt.Color(204, 204, 255));
+
         javax.swing.GroupLayout displayPanelLayout = new javax.swing.GroupLayout(displayPanel);
         displayPanel.setLayout(displayPanelLayout);
         displayPanelLayout.setHorizontalGroup(
@@ -397,6 +402,8 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        nextButton.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        nextButton.setForeground(new java.awt.Color(255, 102, 153));
         nextButton.setText("next");
         nextButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -409,6 +416,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        previousButton.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        previousButton.setForeground(new java.awt.Color(255, 51, 102));
         previousButton.setText("previous");
         previousButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,6 +425,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        pauseButton.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        pauseButton.setForeground(new java.awt.Color(255, 51, 153));
         pauseButton.setText("Pause");
         pauseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -451,9 +462,6 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(questionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addComponent(displayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(previousButton)
@@ -461,9 +469,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(pauseButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(questionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

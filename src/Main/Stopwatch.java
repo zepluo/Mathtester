@@ -57,7 +57,7 @@ public void stop(){
         
     }
     
-    interval=inter;
+    frame.interval=inter;
     System.out.println(interval);
  
     
@@ -84,7 +84,7 @@ public void go() {
 
                 display.setText(x);
                 if (interval < 10) {
-                    Font font = new Font("Rockwell Condensed", Font.PLAIN, 25);
+                    Font font = new Font("Rockwell Condensed", Font.BOLD, 30);
                     display.setFont(font);
                     display.setBackground(Color.BLUE);
 
@@ -116,6 +116,10 @@ public void go() {
 
         display = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(204, 204, 255));
+        setForeground(new java.awt.Color(204, 204, 255));
+
+        display.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         display.setText("START");
         display.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,8 +144,8 @@ public void go() {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(display, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
+                .addComponent(display, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93))
         );
     }// </editor-fold>//GEN-END:initComponents
 

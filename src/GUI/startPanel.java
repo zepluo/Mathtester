@@ -29,7 +29,7 @@ public class startPanel extends javax.swing.JPanel {
     }
      private void load()
      {
-        ImageIcon image = new ImageIcon(new ImageIcon(MainFrame.STARTPANELIMAGEFILE).getImage().getScaledInstance(520, 340, 300));
+        ImageIcon image = new ImageIcon(new ImageIcon(MainFrame.STARTPANELIMAGEFILE).getImage().getScaledInstance(794, 478, 300));
        
         coverImage.setIcon(image);
         main.getBar().setVisible(false);
@@ -64,30 +64,34 @@ public class startPanel extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        setBackground(new java.awt.Color(204, 204, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        loadTest.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         loadTest.setText("loadTest");
         loadTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadTestActionPerformed(evt);
             }
         });
-        add(loadTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, -1, -1));
+        add(loadTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, -1, 70));
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel1.setText("Name");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 50, 30));
 
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel2.setText("student ID");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 80, 30));
-        add(nameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 130, 40));
+        add(nameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 130, 40));
 
         IDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IDFieldActionPerformed(evt);
             }
         });
-        add(IDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 120, 40));
-        add(coverImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 340));
+        add(IDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 130, 40));
+        add(coverImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 794, 478));
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTestActionPerformed

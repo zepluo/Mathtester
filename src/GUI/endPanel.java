@@ -97,8 +97,13 @@ public class endPanel extends javax.swing.JPanel {
         newTestButton = new javax.swing.JButton();
         downloadReportButton = new javax.swing.JButton();
 
-        scoreFinal.setText("jLabel1");
+        setBackground(new java.awt.Color(204, 204, 255));
 
+        scoreFinal.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        scoreFinal.setForeground(new java.awt.Color(255, 51, 102));
+        scoreFinal.setText("           ");
+
+        reportTable.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         reportTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -112,6 +117,7 @@ public class endPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(reportTable);
 
+        newTestButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         newTestButton.setText("new test");
         newTestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,6 +125,7 @@ public class endPanel extends javax.swing.JPanel {
             }
         });
 
+        downloadReportButton.setFont(new java.awt.Font("Lucida Grande", 1, 15)); // NOI18N
         downloadReportButton.setText("Download the Report");
         downloadReportButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,10 +155,12 @@ public class endPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(scoreFinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(newTestButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(newTestButton)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(scoreFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(downloadReportButton)

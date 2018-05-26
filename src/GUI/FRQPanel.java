@@ -70,9 +70,11 @@ public class FRQPanel extends javax.swing.JPanel {
         name = new javax.swing.JLabel();
         imagePanel = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(204, 204, 255));
         setPreferredSize(new java.awt.Dimension(500, 415));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        submitButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +84,7 @@ public class FRQPanel extends javax.swing.JPanel {
         add(submitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 287, -1, -1));
 
         answerArea.setColumns(20);
+        answerArea.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         answerArea.setRows(5);
         answerArea.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -92,16 +95,20 @@ public class FRQPanel extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 220, 339, -1));
 
+        stemTextField.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         stemTextField.setText("jTextField1");
         stemTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 stemTextFieldActionPerformed(evt);
             }
         });
-        add(stemTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 83, 339, 109));
+        add(stemTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 83, 340, 109));
 
+        name.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         name.setText("jLabel2");
         add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 6, -1, -1));
+
+        imagePanel.setBackground(new java.awt.Color(204, 204, 255));
         add(imagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 230, 220));
     }// </editor-fold>//GEN-END:initComponents
 
